@@ -297,3 +297,4 @@ then we can put those results back in xml file
 
 This code conforms to PEP8
 It is fully tested, 100% coverage
+A Buildbot runs tests at each commit
