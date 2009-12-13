@@ -1,11 +1,18 @@
+XML and CSV comparisons
+=======================
+
+Two scripts are provided xml_cmp and csv_cmp
+They both compares 2 files and outputs delta as file_suppr,
+file_addon and file_changes
+
 List comparison
-###############
+===============
 
 listcomparator provides a Comparator object that allows to find the differences
 between two lists _provided the elements of the lists appear in the same order_
 
->>> old = [1,2,3,4,5,6]
->>> new = [1,3,4,7,6]
+>>> old = [1, 2, 3, 4, 5, 6]
+>>> new = [1, 3, 4, 7, 6]
 
 >>> from listcomparator.comparator import Comparator
 
@@ -22,9 +29,9 @@ The check method gives values to additions and deletions attributes
 
 We can also use lists of  lists
 
->>> old_list = [['62145','azerty'],['1234','qwerty'],['9876','ipsum']]
->>> new_list = [['62145','azerty'],['1234','qwertw'],['4865','lorem']]
->>> comp = Comparator(old_list,new_list)
+>>> old_list = [['62145', 'azerty'], ['1234', 'qwerty'], ['9876', 'ipsum']]
+>>> new_list = [['62145', 'azerty'], ['1234', 'qwertw'], ['4865', 'lorem']]
+>>> comp = Comparator(old_list, new_list)
 >>> comp.check()
 >>> comp.additions
 [['1234', 'qwertw'], ['4865', 'lorem']]

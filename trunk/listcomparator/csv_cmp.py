@@ -11,12 +11,14 @@ compares 2 csv files and outputs delta as file_suppr.csv, file_addon.csv and fil
 usage : %s old_filename new_filenane
 """ % sys.argv[0]
 
+
 class SKV(csv.excel):
     # like excel, but uses semicolons
     delimiter = ";"
 #    quoting = csv.QUOTE_NONE
 
 csv.register_dialect("SKV", SKV)
+
 
 def output_difference(old_file, new_file):
     dirname, filename = path.split(new_file)
@@ -29,7 +31,7 @@ def output_difference(old_file, new_file):
 
     comp = Comparator(old_file, new_file)
     comp.check()
-    comp.getChanges(lambda x:x[0], purge=True)
+    comp.getChanges(lambda x: x[0], purge=True)
     comp.purgeOldNew()
 
     suppr_file = open(filename + '_suppr.csv', 'wb')
@@ -47,6 +49,7 @@ def output_difference(old_file, new_file):
     change_writer.writerows(comp.changes)
     change_file.close()
 
+
 def main():
     args = sys.argv
     if len(args) != 3:
@@ -58,4 +61,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

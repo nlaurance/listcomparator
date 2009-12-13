@@ -1,9 +1,9 @@
 # -*- coding: UTF8 -*-
 
-
 class Comparator(object):
     """ lists comparator
     """
+
     def __init__(self, old, new):
         """ creates new instance
         """
@@ -26,9 +26,11 @@ class Comparator(object):
         key_del = [key(e) for e in self.deletions]
         self.changes = [e for e in self.additions if key(e) in key_del]
         if purge:
-            self.additions = [e for e in self.additions if not e in self.changes]
+            self.additions = [e for e in self.additions \
+                              if not e in self.changes]
             key_changes = [key(e) for e in self.changes]
-            self.deletions = [e for e in self.deletions if not key(e) in key_changes]
+            self.deletions = [e for e in self.deletions \
+                              if not key(e) in key_changes]
 
     def purgeOldNew(self):
         """ Purges lists that have been compared
@@ -117,12 +119,14 @@ class Comparator(object):
     def stilt_walk(self):
         """ follows matching pairs
         """
-        #===============================================================================
-        # Step 1: Compare an entry on the list. The last synchronization is at A[n]
-        # and B[p] entries. Increment n and p until A[n] != B[n] or end of either
-        # A or B. If end, process the A or B leftovers appropriately.
-        # If no match at A[n+1] and B[p+1], set ns and ps equal to 1. Go to step 2.
-        #===============================================================================
+        #======================================================================
+        # Step 1:
+        # Compare an entry on the list. The last synchronization is at A[n]
+        # and B[p] entries. Increment n and p until A[n] != B[n] or end
+        # of either A or B. If end, process the A or B leftovers appropriately.
+        # If no match at A[n+1] and B[p+1], set ns and ps equal to 1.
+        # Go to step 2.
+        #======================================================================
         if self._append_extras():
             return
         while self.old[self.index_old] == self.new[self.index_new]:
@@ -138,11 +142,11 @@ class Comparator(object):
         """ try to resume matching
         if found, will deduce additions or deletions
         """
-        #===============================================================================
+        #======================================================================
         # Step 2: Compare A[n+1] against B[p+ps]. If a match, then you're good.
         # The addition/deletion entries are B[p+1] through B[p+ps-1].
         # Resync at step 1 with n=n+1 and p=p+ps. Otherwise step 3.
-        #===============================================================================
+        #======================================================================
         try:
             new_scout_value = self.new[self.index_new + self.scout_new]
         except IndexError:
@@ -157,18 +161,19 @@ class Comparator(object):
             self.index_new += self.scout_new
             self.stilt_walk()
             return
-        #===============================================================================
+        #======================================================================
         # Step 3: No match, so increment the ps scouting index.
-        # If ps is past end of list, you know that the A[n+1] entry is not in B.
+        # If ps is past end of list, you know that the A[n+1] entry is not in B
         # Process entry, increment n, and go to step 1. Otherwise, step 4.
-        #===============================================================================
+        #======================================================================
         else:
             self.scout_new += 1
-        #===============================================================================
-        # Step 4: Compare B[p+1] to A[n+ns]. If match, then A[n+1] though A[n+ns-1]
-        # are the deletion/addition entries (whatever the inverse of Step 2 match).
+        #======================================================================
+        # Step 4: Compare B[p+1] to A[n+ns].
+        # If match, then A[n+1] though A[n+ns-1] are the deletion/addition
+        # entries (whatever the inverse of Step 2 match).
         # Resync at step 1, with n=n+ns and p=p+1. Otherwise step 5.
-        #===============================================================================
+        #======================================================================
         try:
             old_scout_value = self.old[self.index_old + self.scout_old]
         except IndexError:
@@ -183,11 +188,11 @@ class Comparator(object):
             self.index_old += self.scout_old
             self.stilt_walk()
             return
-        #===============================================================================
+        #======================================================================
         # Step 5: No match, so increment the ns scouting index.
-        # If ns is past end of list, you know that the B[p+1] entry is not in A.
+        # If ns is past end of list, you know that the B[p+1] entry is not in A
         # Process entry, increment p, and go to step 1. Otherwise go to step 2.
-        #===============================================================================
+        #======================================================================
         else:
             self.scout_old += 1
             self.scouting()

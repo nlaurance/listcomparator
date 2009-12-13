@@ -1,6 +1,7 @@
 import unittest
 from listcomparator.comparator import Comparator
 
+
 class testComparator(unittest.TestCase):
 
     def testOldEmpty(self):
@@ -81,6 +82,7 @@ class testComparator(unittest.TestCase):
         self.assertEqual(comp.additions, [0, 9, 11, 7])
         self.assertEqual(comp.deletions, [2, 4])
 
+
 class testChanges(unittest.TestCase):
 
     def setUp(self):
@@ -94,6 +96,7 @@ class testChanges(unittest.TestCase):
         self.assertEqual(self.comp.deletions, [['1234', 'qwerty'], ['9876', 'ipsum']])
 
     def testFunction(self):
+
         def my_key(x):
             return x[0]
         self.comp.getChanges(my_key)
