@@ -296,4 +296,4 @@ what books have changed ? that is have same title, but different other values
 then we can put those results back in xml file
 
 This code conforms to PEP8
-It is fully tested
+It is fully tested, 100% coverage
