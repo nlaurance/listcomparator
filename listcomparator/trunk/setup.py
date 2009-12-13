@@ -22,7 +22,7 @@ long_description = (
     '**************\n'
     + '\n' +
     read('CHANGES.txt')
-    + '\n' +
+    + '\n'
     )
 
 setup(name='ListComparator',
