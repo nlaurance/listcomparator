@@ -7,22 +7,27 @@ def read(*rnames):
 version = '0.1'
 
 long_description = (
-    read('LICENSE.txt')
-    + '\n' +
-    'Detailed Documentation\n'
+    '\n.. contents::\n\n' +
+    'Detailed Documentation\n' +
     '**********************\n'
     + '\n' +
     read('README.txt')
-    + '\n' +
-    'Contributors\n'
+    + '\n\n' +
+    'Contributors\n' +
     '************\n'
     + '\n' +
     read('Contributors.txt')
     + '\n' +
-    'Change history\n'
+    'Change history\n' +
     '**************\n'
     + '\n' +
     read('CHANGES.txt')
+    + '\n' +
+    'Licence\n' +
+    '*******\n'
+    + '\n' +
+    read('LICENSE.txt')
+    + '\n'
     )
 
 setup(name='ListComparator',

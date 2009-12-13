@@ -11,7 +11,7 @@ List comparison
 ===============
 
 listcomparator provides a Comparator object that allows to find the differences
-between two lists _provided the elements of the lists appear in the same order_
+between two lists **provided the elements of the lists appear in the same order**
 
 >>> old = [1, 2, 3, 4, 5, 6]
 >>> new = [1, 3, 4, 7, 6]
@@ -19,6 +19,7 @@ between two lists _provided the elements of the lists appear in the same order_
 >>> from listcomparator.comparator import Comparator
 
 Let's create a Comparator object
+
 >>> comp = Comparator(old,new)
 
 The check method gives values to additions and deletions attributes
@@ -52,7 +53,7 @@ list is the same, a kind of id.
 ...     return x[0]
 ...
 
-Thye getChanges methods then provides a new attribute : changes
+The getChanges methods then provides a new attribute : changes
 
 >>> comp.getChanges(my_key)
 >>> comp.changes
@@ -159,14 +160,17 @@ let's make two xml files describing books
 ... '''
 
 elementtree is required to parse xml
+
 >>> from elementtree import ElementTree as ET
 
 for this test we'll use cStringIO rather than a file
+
 >>> import cStringIO
 >>> ex_old = cStringIO.StringIO(old)
 >>> ex_new = cStringIO.StringIO(new)
 
 we parse contents
+
 >>> root_old = ET.parse(ex_old).getroot()
 >>> root_new = ET.parse(ex_new).getroot()
 
@@ -175,10 +179,12 @@ the "book" tag identifies objects we want
 >>> objects_new = root_new.findall('book')
 
 as we can't compare 2 objects, we stringify them
+
 >>> objects_old = [ET.tostring(o) for o in objects_old]
 >>> objects_new = [ET.tostring(o) for o in objects_new]
 
 from there, Comparator is usefull
+
 >>> my_comp = Comparator(objects_old, objects_new)
 >>> my_comp.check()
 
@@ -231,12 +237,14 @@ from there, Comparator is usefull
 
 we need to know wich tag is used to uniquely define an object
 here we choose to use the "title" tag
+
 >>> def item_signature(xml_element):
 ...     title = xml_element.find('title')
 ...     return title.text
 ...
 
 we build our custom function for use by the Comparator
+
 >>> def my_key(str):
 ...     file_like = cStringIO.StringIO(str)
 ...     root = ET.parse(file_like)
@@ -244,6 +252,7 @@ we build our custom function for use by the Comparator
 ...
 
 then the getChanges method of the Comparator becomes available
+
 >>> my_comp.getChanges(my_key, purge=True)
 
 What books have been exclusively added ?
@@ -278,6 +287,7 @@ what books have been exclusively removed ?
 <BLANKLINE>
 
 what books have changed ? that is have same title, but different other values
+
 >>> for e in my_comp.changes:
 ...     print e
 ...
@@ -295,6 +305,6 @@ what books have changed ? that is have same title, but different other values
 
 then we can put those results back in xml file
 
-This code conforms to PEP8
-It is fully tested, 100% coverage
-A Buildbot runs tests at each commit
+* This code conforms to PEP8
+* It is fully tested, 100% coverage
+* A Buildbot runs tests at each commit

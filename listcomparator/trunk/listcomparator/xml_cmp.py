@@ -53,7 +53,7 @@ def output_difference(old_file, new_file, object_tag, id_tag):
     ET.ElementTree(change_tree).write(filename + '_changes.xml', 'utf8')
 
 
-if __name__ == '__main__':
+def main():
     args = sys.argv
     if len(args) != 5:
         print help
@@ -61,3 +61,6 @@ if __name__ == '__main__':
     else:
         output_difference(args[1], args[2], args[3], args[4])
         sys.exit(0)
+
+if __name__ == '__main__':
+    main()
