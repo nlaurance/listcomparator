@@ -23,11 +23,6 @@ long_description = (
     + '\n' +
     read('CHANGES.txt')
     + '\n' +
-    'Licence\n' +
-    '*******\n'
-    + '\n' +
-    read('LICENSE.txt')
-    + '\n'
     )
 
 setup(name='ListComparator',
