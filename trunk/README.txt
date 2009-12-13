@@ -5,6 +5,8 @@ Two scripts are provided xml_cmp and csv_cmp
 They both compares 2 files and outputs delta as file_suppr,
 file_addon and file_changes
 
+the extension is forced to xml or csv respectively
+
 List comparison
 ===============
 
