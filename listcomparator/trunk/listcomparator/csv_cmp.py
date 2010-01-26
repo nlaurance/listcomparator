@@ -4,16 +4,17 @@
 import csv
 import sys
 from os import path
-from comparator import Comparator
+from listcomparator.comparator import Comparator
 
-help = """
+HELP = """
 compares 2 csv files and outputs delta as file_suppr.csv, file_addon.csv and file_changes.csv
 usage : %s old_filename new_filenane
 """ % sys.argv[0]
 
 
 class SKV(csv.excel):
-    # like excel, but uses semicolons
+    """ like excel, but uses semicolons
+    """
     delimiter = ";"
 #    quoting = csv.QUOTE_NONE
 
@@ -21,8 +22,11 @@ csv.register_dialect("SKV", SKV)
 
 
 def output_difference(old_file, new_file):
-    dirname, filename = path.split(new_file)
-    filename, ext = path.splitext(filename)
+    """ creates a csv file that is the diff between
+    two csv files
+    """
+    unused, filename = path.split(new_file)
+    filename, unused = path.splitext(filename)
 
     old_file = open(old_file)
     new_file = open(new_file)
@@ -53,7 +57,7 @@ def output_difference(old_file, new_file):
 def main():
     args = sys.argv
     if len(args) != 3:
-        print help
+        print HELP
         sys.exit(1)
     else:
         output_difference(args[1], args[2])

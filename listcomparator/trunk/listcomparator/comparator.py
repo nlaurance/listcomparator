@@ -1,3 +1,4 @@
+""" ordered list comparator """
 # -*- coding: UTF8 -*-
 
 class Comparator(object):
@@ -23,6 +24,8 @@ class Comparator(object):
         self.scout_new = 1
 
     def getChanges(self, key, purge=False):
+        """ computes the differences
+        """
         key_del = [key(e) for e in self.deletions]
         self.changes = [e for e in self.additions if key(e) in key_del]
         if purge:

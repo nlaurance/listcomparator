@@ -7,7 +7,7 @@ from elementtree import ElementTree as ET
 from comparator import Comparator
 import cStringIO
 
-help = """
+HELP = """
 compares 2 xml files and outputs delta as file_suppr.xml, file_addon.xml and file_changes.xml
 usage : %s old_filename new_filenane object_tag id_tag
 or
@@ -18,8 +18,8 @@ or
 def output_difference(old_file, new_file, object_tag, id_tag):
     """ checks two xml files
     """
-    dirname, filename = path.split(new_file)
-    filename, ext = path.splitext(filename)
+    unused, filename = path.split(new_file)
+    filename, unused = path.splitext(filename)
 
     root_old = ET.ElementTree(file=old_file)
     root_new = ET.ElementTree(file=new_file)
@@ -31,10 +31,14 @@ def output_difference(old_file, new_file, object_tag, id_tag):
     objects_new = [ET.tostring(o) for o in objects_new]
 
     def item_signature(xml_element):
+        """ helper function
+        """
         title = xml_element.find(id_tag)
         return title.text
 
     def my_key(str):
+        """ used to recognize what make an xml element unique
+        """
         file_like = cStringIO.StringIO(str)
         root = ET.parse(file_like)
         return item_signature(root)
@@ -56,7 +60,7 @@ def output_difference(old_file, new_file, object_tag, id_tag):
 def main():
     args = sys.argv
     if len(args) != 5:
-        print help
+        print HELP
         sys.exit(1)
     else:
         output_difference(args[1], args[2], args[3], args[4])

@@ -86,14 +86,18 @@ class testComparator(unittest.TestCase):
 class testChanges(unittest.TestCase):
 
     def setUp(self):
-        old_list = [['62145', 'azerty'], ['1234', 'qwerty'], ['9876', 'ipsum']]
-        new_list = [['62145', 'azerty'], ['1234', 'qwertw'], ['4865', 'lorem']]
+        old_list = [['62145', 'azerty'], ['1234', 'qwerty'],
+                                         ['9876', 'ipsum']]
+        new_list = [['62145', 'azerty'], ['1234', 'qwertw'],
+                                         ['4865', 'lorem']]
         self.comp = Comparator(old_list, new_list)
         self.comp.check()
 
     def testResults(self):
-        self.assertEqual(self.comp.additions, [['1234', 'qwertw'], ['4865', 'lorem']])
-        self.assertEqual(self.comp.deletions, [['1234', 'qwerty'], ['9876', 'ipsum']])
+        self.assertEqual(self.comp.additions, [['1234', 'qwertw'],
+                                               ['4865', 'lorem']])
+        self.assertEqual(self.comp.deletions, [['1234', 'qwerty'],
+                                               ['9876', 'ipsum']])
 
     def testFunction(self):
 

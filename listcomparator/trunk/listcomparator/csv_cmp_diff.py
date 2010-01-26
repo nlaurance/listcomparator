@@ -5,15 +5,17 @@ from difflib import unified_diff
 from os import path
 import sys
 
-help = """
+HELP = """
 compares 2 csv files and outputs delta as file_suppr.csv and file_addon.csv
 usage : %s old_filename new_filenane
 """ % sys.argv[0]
 
 
 def sortir_ecart(old_file, new_file):
-    dirname, filename = path.split(new_file)
-    filename, ext = path.splitext(filename)
+    """ compares 2 xml files
+    """
+    unused, filename = path.split(new_file)
+    filename, unused = path.splitext(filename)
 
     old_file = open(old_file).readlines()
     new_file = open(new_file).readlines()
@@ -36,7 +38,7 @@ def sortir_ecart(old_file, new_file):
 if __name__ == '__main__':
     args = sys.argv
     if len(args) != 3:
-        print help
+        print HELP
         sys.exit(1)
     else:
         sortir_ecart(args[1], args[2])
