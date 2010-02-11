@@ -13,7 +13,7 @@ import sys
 
 try:
     import nose
-except ImportError:
+except ImportError: # pragma: no cover
     print ('nose is required to run the test suite')
     sys.exit(1)
 
@@ -21,7 +21,7 @@ try:
     # make sure the current source is first on sys.path
     sys.path.insert(0, '..')
     import listcomparator
-except ImportError:
+except ImportError: # pragma: no cover
     print ('Cannot find listcomparator to test: %s' % sys.exc_info()[1])
     sys.exit(1)
 else:

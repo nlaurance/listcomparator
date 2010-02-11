@@ -1,8 +1,9 @@
+""" main test module """
 import unittest
 from listcomparator.comparator import Comparator
 
 
-class testComparator(unittest.TestCase):
+class TestComparator(unittest.TestCase):
 
     def testOldEmpty(self):
         old_list = []
@@ -83,9 +84,11 @@ class testComparator(unittest.TestCase):
         self.assertEqual(comp.deletions, [2, 4])
 
 
-class testChanges(unittest.TestCase):
+class TestChanges(unittest.TestCase):
 
     def setUp(self):
+        """ so wxe have a few values to play with
+        """
         old_list = [['62145', 'azerty'], ['1234', 'qwerty'],
                                          ['9876', 'ipsum']]
         new_list = [['62145', 'azerty'], ['1234', 'qwertw'],
@@ -102,6 +105,7 @@ class testChanges(unittest.TestCase):
     def testFunction(self):
 
         def my_key(x):
+            """ service function"""
             return x[0]
         self.comp.getChanges(my_key)
         self.assertEqual(self.comp.changes, [['1234', 'qwertw']])
@@ -121,13 +125,13 @@ class testChanges(unittest.TestCase):
         self.assertEqual(self.comp.new, None)
 
 #def test_suite():
-#    ma_suite = unittest.TestSuite()
-#    todo = [unittest.makeSuite(testComparator),
-#            unittest.makeSuite(testChanges), ]
-#    ma_suite.addTests(todo)
-#    return ma_suite
+#    my_suite = unittest.TestSuite()
+#    todo = [unittest.makeSuite(TestComparator),
+#            unittest.makeSuite(TestChanges), ]
+#    my_suite.addTests(todo)
+#    return my_suite
 
-if __name__ == '__main__':
-    ma_suite = unittest.TestSuite()
-    ma_suite.addTest(testComparator('testMix2'))
-    unittest.TextTestRunner(verbosity=2).run(ma_suite)
+if __name__ == '__main__': # pragma: no cover
+    my_suite = unittest.TestSuite()
+    my_suite.addTest(TestComparator('testMix2'))
+    unittest.TextTestRunner(verbosity=2).run(my_suite)
